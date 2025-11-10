@@ -5,15 +5,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-def test_homepage():
+def test_homepage(driverFixture):
 
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
-    driver.implicitly_wait(5)
-    wait = WebDriverWait(driver, 10)
-
-    # Pesquisar tomate 
+    # Pesquisar tomate
+    wait = WebDriverWait(driverFixture, 10)
     campo_pesquisa = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='search']")))
     campo_pesquisa.send_keys("Tomato")
 
@@ -35,6 +30,6 @@ def test_homepage():
     print(f"A quantidade do produto é :{quantidade_atual}")
 
     # Adiciona o produto no carrinho
-    driver.find_element(By.XPATH, "//button[text()='ADD TO CART']").click()
-    driver.quit()
+    driverFixture.find_element(By.XPATH, "//button[text()='ADD TO CART']").click()
+
    
